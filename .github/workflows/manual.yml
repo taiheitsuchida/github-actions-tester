@@ -1,21 +1,28 @@
-# This is a basic workflow that is manually triggered
-
-name: Manual workflow
-
-# Controls when the action will run. Workflow runs when manually triggered using the UI
-# or API.
+# 実行タイミング(手動実行)
 on:
-  workflow_dispatch
+  workflow_dispatch:
+    inputs:
+#       param_name1:
+#         description: 'param_name or description'
+#         default: ''
+#         required: true
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+# 名称
+name: helloworld
+
+# 実行ジョブ
 jobs:
-  # This workflow contains a single job called "greet"
   greet:
-    # The type of runner that the job will run on
+    name: greeting
     runs-on: ubuntu-latest
+    env:
+      HELLO: 'Hello'
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Runs a single command using the runners shell
-    - name: Send greeting
-      run: echo "Hello"
+      - name: say helloworld 01
+        run: echo "helloworld."
+        
+      - name: say helloworld 02
+        env:
+          WORLD: 'World'
+        run: echo "${{ env.HELLO }} ${{ env.WORLD }}."
